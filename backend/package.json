@@ -1,0 +1,24 @@
+{
+	"name": "<NAME OF YOUR BACKEND MODULE>",
+	"version": "0.0.1",
+	"description": "Backend for the Salesforce Service Cloud custom split activity",
+	"main": "server.js",
+	"dependencies": {
+		"body-parser": "^1.17.1",
+		"express": "^4.15.2",
+		"jsforce": "^1.7.1",
+		"jsonwebtoken": "^7.4.0"
+	},
+	"options": {
+		"salesforce": {
+			"serviceCloud": {
+				"username": "<YOUR SERVICE CLOUD USERNAME>",
+				"password": "<YOUR SERVICE CLOUD PASSWORD>",
+				"loginUrl": "https://login.salesforce.com"
+			},
+			"marketingCloud": {
+				"jwtSecret": "<YOUR UNCONVERTED SALT KEY HERE>"
+			}
+		}
+	}
+}
