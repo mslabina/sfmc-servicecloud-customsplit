@@ -6,21 +6,21 @@ This is a basic example of a custom journey builder split activity that reads da
 
 ## Setup
 
-1. Before this example can be used, a package containing a Journey Builder Activity needs to be created in [Salesforce Marketing Cloud App Center](https://appcenter-auth.s1.marketingcloudapps.com). A documentation for this task can be found here: [Create a Marketing Cloud App](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/create-a-mc-app.htm).
+1. Prepare deployment (gather knowledge of the URL the application will be hosted, etc.) to a server you manage or any Node.js-ready cloud service like [heroku.com](https://www.heroku.com). (*Note:* this example-application is already prepared to be deployed to heroku, so this is the easiest option. Furthermore you don't have to worry about SSL-setup when using heroku.)
+2. Before this example can be used, a package containing a Journey Builder Activity needs to be created in [Salesforce Marketing Cloud App Center](https://appcenter-auth.s1.marketingcloudapps.com). A documentation for this task can be found here: [Create a Marketing Cloud App](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/create-a-mc-app.htm).
 	- __Important__: The activity's "Public Extension"-setting needs to be set to "This application and other installed Applications" and the example needs to be available via HTTPS which has to be running on the default port 443.
-2. To secure the backend and make sure only requests from your marketing cloud instance are processed, you need to create a salt key in marketing cloud.
-	- Information can be found in the documentation on [Key Management](http://help.marketingcloud.com/en/documentation/marketing_cloud/administration/keymanagement/) and [Encode with Customer Key](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/encode-custom-activities-using-jwt-customer-key.htm). Follow these steps and add your salt key's ascii representation to backend/package.json under `options.salesforce.marketingCloud.jwtSecret`, as well as the external key seen in Key Management to all the `customerKey`-properties in public/config.json.
+3. To secure the backend and make sure only requests from your marketing cloud instance are processed, you need to create a salt key in marketing cloud.
+	- Information can be found in the documentation on [Key Management](http://help.marketingcloud.com/en/documentation/marketing_cloud/administration/keymanagement/) and [Encode with Customer Key](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/encode-custom-activities-using-jwt-customer-key.htm). Follow these steps and add your salt key's ascii representation to package.json under `options.salesforce.marketingCloud.jwtSecret`, as well as the external key seen in Key Management to all the `customerKey`-properties in public/config.json.
 	- __Important__: According to the documentation the salt key can be converted by piping it to `xxd -p` and adding `0x` as prefix. However in my tests on MacOS and CentOS the last two characters `0a` had to be removed, so I propose to use `echo "Hello world" | xxd -p | sed 's/^/0x/;s/0a$//'` instead, where `Hello world` would be your salt.
-3. The unique key of the created Journey Builder Activity needs to be added to public/config.json properties `key` and `configurationArguments.applicationExtensionKey`
-4. Replace `<URL OF THE SERVER RUNNING THE BACKEND>` in public/config.json with the URL where your split's backend can be reached (needs to be proxied (e.g. using nginx) in case you use an unaltered version of backend/server.js).
-5. Replace `<URL OF THE SERVER/CDN HOSTING THE PUBLIC FOLDER>` in public/config.json with the URL where the public folder of this example is hosted.
+4. The unique key of the created Journey Builder Activity needs to be added to public/config.json properties `key` and `configurationArguments.applicationExtensionKey`
+5. Replace `<URL OF THE SERVER RUNNING THE BACKEND>` in public/config.json with the URL where your split's backend can be reached (unless deployed to heroku or a similar service, you need to make sure this express app is eihter altered to run using https on port 443 or proxy it on your own (e.g. using nginx)).
 6. Adapt the `outcomes` of the split in public/config.json according to your needs.
-7. Add your Service Cloud credentials to backend/package.json under `options.salesforce.serviceCloud.username` and `options.salesforce.serviceCloud.password`.
+7. Add your Service Cloud credentials to package.json under `options.salesforce.serviceCloud.username` and `options.salesforce.serviceCloud.password`.
 8. Adapt public/customActivity.js save-function so the desired Id from Service Cloud is passed in the inArguments. `<EVENT DATA ID PATH>` needs to be replaced with the field name of the entry event's data extension field containing the Id of the Service Cloud object to query. If your object is a custom Object named _CustomObject_ the path would be `CustomObject__c:Id` for example.
 9. Adapt backed/lib/sfdc.js and backend/server.js so the desired object and field from Service Cloud is read and the outcome is returned accordingly.
-10. Change the module name of the backend in backend/package.json
-11. Before running the node/express server, you need to install the dependencies using the command `npm i` in the backend-folder.
-12. _Optional_: Replace the icons for the custom activity in public/images.
+10. Change the module name of the backend in package.json
+11. _Optional_: Replace the icons for the custom activity in public/images.
+12. Deploy the application to the service you selected in step 1.
 
 ## Usage
 

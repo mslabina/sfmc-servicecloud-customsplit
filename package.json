@@ -1,8 +1,11 @@
 {
 	"name": "<NAME OF YOUR BACKEND MODULE>",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Backend for the Salesforce Service Cloud custom split activity",
-	"main": "server.js",
+	"main": "backend/server.js",
+	"scripts": {
+		"start": "node backend/server.js"
+	},
 	"dependencies": {
 		"body-parser": "^1.17.1",
 		"express": "^4.15.2",

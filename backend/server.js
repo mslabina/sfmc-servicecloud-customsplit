@@ -1,7 +1,7 @@
 'use strict';
 
 const Path = require('path');
-const Pkg = require(Path.join(__dirname, 'package.json'));
+const Pkg = require(Path.join(__dirname, '..', 'package.json'));
 const express = require('express');
 
 // Helper utility for verifying and decoding the jwt sent from Salesforce Marketing Cloud.
@@ -66,7 +66,11 @@ app.post(/\/activity\/(save|publish|validate)/, (req, res) => {
 	});
 });
 
-// Start the server and listen on port 12345
-app.listen(12345, () => {
-	console.log('Service Cloud customsplit backend listening on 12345!');
+// Serve the custom activity's interface, config, etc.
+app.use(express.static(Path.join(__dirname, '..', 'public')));
+
+// Start the server and listen on the port specified by heroku or defaulting to 12345
+app.listen(process.env.PORT || 12345, () => {
+	console.log('Service Cloud customsplit backend is now running!');
 });
+

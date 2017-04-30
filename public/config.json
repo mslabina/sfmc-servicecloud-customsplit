@@ -80,7 +80,7 @@
 		}
 	},
 	"edit": {
-		"url": "https://<URL OF THE SERVER/CDN HOSTING THE PUBLIC FOLDER>/index.html",
+		"url": "https://<URL OF THE SERVER RUNNING THE BACKEND>/index.html",
 		"height": 200,
 		"width": 500
 	}
