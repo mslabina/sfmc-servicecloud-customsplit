@@ -23,6 +23,7 @@ As mentioned in the Marketing Cloud documentation under [Create Custom Activitie
 10. Change the module name of the backend in package.json
 11. _Optional_: Replace the icons for the custom activity in public/images.
 12. Deploy the application to the service you selected in step 1.
+13. Make sure the server hosting the backend is allowed to access to your Service Cloud instance (Setup -> Administration Setup -> Security Controls -> Network Access). Otherwise you will get an error as soon as the backend tries to login.
 
 ## Usage
 
