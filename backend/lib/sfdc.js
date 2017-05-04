@@ -4,7 +4,7 @@ const jsforce = require('jsforce');
 
 /**
  * @class
- * @param {Object} options					The object containing all the connection options.
+ * @param {Object} options		The object containing all the connection options.
  * @param {string} options.username	The username for the salesforce service cloud account.
  * @param {string} options.password	The password for the salesforce service cloud account.
  * @param {string} options.loginUrl	The URL to the loginpage of the saleforce instance.
