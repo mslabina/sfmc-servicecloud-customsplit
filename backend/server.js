@@ -34,7 +34,7 @@ app.post('/activity/execute', (req, res) => {
 			// write it to the serviceCloudId variable
 
 			// Call the function that retrieves desired data from Service Cloud
-			sfdc.retrieveStatusOfAktion(serviceCloudId, (err, fieldValue) => {
+			sfdc.retrieveFieldOfObject(serviceCloudId, (err, fieldValue) => {
 				if (err) {
 					console.error(err);
 					return res.status(500).end();
