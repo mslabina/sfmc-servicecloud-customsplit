@@ -45,7 +45,7 @@ define(function (require) {
 
 		$('.step').hide();
 
-		switch 	(currentStep.key) {
+		switch (currentStep.key) {
 		case 'eventdefinitionkey':
 			$('#step1').show();
 			$('#step1 input').focus();
