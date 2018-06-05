@@ -40,7 +40,7 @@ As mentioned in the Marketing Cloud documentation under [Create Custom Activitie
 
 ## License (MIT)
 
-__Copyright © 2017 [Markus Slabina](https://github.com/mslabina)__
+__Copyright © 2018 [Markus Slabina](https://github.com/mslabina)__
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
