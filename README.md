@@ -29,7 +29,7 @@ As mentioned in the Marketing Cloud documentation under [Create Custom Activitie
 
 1. If the setup in App Center has been done correctly and the files are available under the specified endpoint you should be able to see the custom split when editing a journey in journey builder alsongside the other _Flow Control_ activities.
 2. Drag the split to your journey and click on it to configure it.
-	- In the only configuration step, provide the _Event Definition Key_ of the Service Cloud entry event, which can be found under _Journey Builder > Entry Sources_
+	- The retrieval of the _Event Definition Key_ works automatically, so just check if a reasonable value has been retrieved.
 3. Finish building your journey and activate it.
 
 ## Contributors
@@ -40,7 +40,7 @@ As mentioned in the Marketing Cloud documentation under [Create Custom Activitie
 
 ## License (MIT)
 
-__Copyright © 2017 [Markus Slabina](https://github.com/mslabina)__
+__Copyright © 2018 [Markus Slabina](https://github.com/mslabina)__
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

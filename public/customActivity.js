@@ -8,9 +8,11 @@ define(function (require) {
 		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'}
 	];
 	var currentStep = steps[0].key;
+	var eventDefinitionKey = '';
 
 	$(window).ready(function () {
 		connection.trigger('ready');
+		connection.trigger('requestInteraction');
 	});
 
 	function initialize (data) {
@@ -45,7 +47,7 @@ define(function (require) {
 
 		$('.step').hide();
 
-		switch 	(currentStep.key) {
+		switch (currentStep.key) {
 		case 'eventdefinitionkey':
 			$('#step1').show();
 			$('#step1 input').focus();
@@ -53,9 +55,16 @@ define(function (require) {
 		}
 	}
 
-	function save () {
-		var eventDefinitionKey = $('#select-entryevent-defkey').val();
+	function requestedInteractionHandler (settings) {
+		try {
+			eventDefinitionKey = settings.triggers[0].metaData.eventDefinitionKey;
+			$('#select-entryevent-defkey').val(eventDefinitionKey);
+		} catch (e) {
+			console.error(e);
+		}
+	}
 
+	function save () {
 		payload['arguments'] = payload['arguments'] || {};
 		payload['arguments'].execute = payload['arguments'].execute || {};
 		payload['arguments'].execute.inArguments = [{
@@ -74,4 +83,5 @@ define(function (require) {
 	connection.on('clickedNext', onClickedNext);
 	connection.on('clickedBack', onClickedBack);
 	connection.on('gotoStep', onGotoStep);
+	connection.on('requestedInteraction', requestedInteractionHandler);
 });
