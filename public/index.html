@@ -55,7 +55,14 @@
 	<div id="step1" class="step">
 		<p>Reading the event definition key of the journey's entry event..</p>
 		<p class="inputLabel">Event Definition Key</p>
-		<input id="select-entryevent-defkey" placeholder="journey entry event's event definition key" type="text" required="required" disabled="disabled" minlength="1">
+		<input id="select-entryevent-defkey" placeholder="journey entry event's event definition key" type="text" required="required" disabled="disabled" minlength="1" />
+	</div>
+	<div id="step2" class="step">
+		<p>Please select the ID (event data column) to pass to the custom split backend.</p>
+		<p class="inputLabel">ID</p>
+		<input id="select-id" placeholder="ID to pass to the backend" type="text" />
+		<select id="select-id-dropdown">
+		</select>
 	</div>
 </body>
 </html>
