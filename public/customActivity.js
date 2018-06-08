@@ -5,10 +5,12 @@ define(function (require) {
 	var connection = new Postmonger.Session();
 	var payload = {};
 	var steps = [
-		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'}
+		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'},
+		{'key': 'idselection', 'label': 'ID Selection'}
 	];
 	var currentStep = steps[0].key;
 	var eventDefinitionKey = '';
+	var deFields = [];
 
 	$(window).ready(function () {
 		connection.trigger('ready');
@@ -22,7 +24,7 @@ define(function (require) {
 	}
 
 	function onClickedNext () {
-		if (currentStep.key === 'eventdefinitionkey') {
+		if (currentStep.key === 'idselection') {
 			save();
 		} else {
 			connection.trigger('nextStep');
@@ -52,6 +54,10 @@ define(function (require) {
 			$('#step1').show();
 			$('#step1 input').focus();
 			break;
+		case 'idselection':
+			$('#step2').show();
+			$('#step2 input').focus();
+			break;
 		}
 	}
 
@@ -59,6 +65,30 @@ define(function (require) {
 		try {
 			eventDefinitionKey = settings.triggers[0].metaData.eventDefinitionKey;
 			$('#select-entryevent-defkey').val(eventDefinitionKey);
+
+			if (settings.triggers[0].type === 'SalesforceObjectTriggerV2' &&
+					settings.triggers[0].configurationArguments &&
+					settings.triggers[0].configurationArguments.eventDataConfig &&
+					settings.triggers[0].configurationArguments.eventDataConfig.objects) {
+				settings.triggers[0].configurationArguments.eventDataConfig.objects.forEach((obj) => {
+					deFields = deFields.concat(obj.fields.map((fieldName) => {
+						return obj.dePrefix + fieldName;
+					}));
+				});
+
+				deFields.forEach((option) => {
+					$('#select-id-dropdown').append($('<option>', {
+						value: option,
+						text: option
+					}));
+				});
+
+				$('#select-id').hide();
+				$('#select-id-dropdown').show();
+			} else {
+				$('#select-id-dropdown').hide();
+				$('#select-id').show();
+			}
 		} catch (e) {
 			console.error(e);
 		}
@@ -67,8 +97,11 @@ define(function (require) {
 	function save () {
 		payload['arguments'] = payload['arguments'] || {};
 		payload['arguments'].execute = payload['arguments'].execute || {};
+
+		var idField = deFields.length > 0 ? $('#select-id-dropdown').val() : $('#select-id').val();
+
 		payload['arguments'].execute.inArguments = [{
-			'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"<EVENT DATA ID PATH>\"}}'
+			'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"' + idField + '\"}}'
 		}];
 
 		payload['metaData'] = payload['metaData'] || {};

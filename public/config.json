@@ -37,7 +37,8 @@
 		}
 	},
 	"wizardSteps": [
-		{"key": "eventdefinitionkey", "label": "Event Definition Key"}
+		{"key": "eventdefinitionkey", "label": "Event Definition Key"},
+		{"key": "idselection", "label": "ID Selection"}
 	],
 	"outcomes": [
 		{
