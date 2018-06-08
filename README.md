@@ -29,7 +29,10 @@ As mentioned in the Marketing Cloud documentation under [Create Custom Activitie
 1. If the setup in App Center has been done correctly and the files are available under the specified endpoint you should be able to see the custom split when editing a journey in journey builder alsongside the other _Flow Control_ activities.
 2. Drag the split to your journey and click on it to configure it.
 	- The retrieval of the _Event Definition Key_ works automatically, so just check if a reasonable value has been retrieved.
+	![Event Definition Key Selection](documentation-resources/wizard_event_definition_key.png?raw=true "Event Definition Key Selection")
 	- In the next step you need to provide the Id that is supposed to be passed to the split's backend. This is the name of the entry event's data extension column containing the Id of the Service Cloud object to query. If your entry event is a Salesforce Data entry event, you can easily select the desired column in a dropdown. If it is a different type of entry event, you need to type the column name in the provided input field.
+	![ID Selection - Dropdown](documentation-resources/wizard_id_selection.png?raw=true "ID Selection - Dropdown")
+	![ID Selection - Input](documentation-resources/wizard_id_selection_other_entry.png?raw=true "ID Selection - Input")
 3. Finish building your journey and activate it.
 
 ## Contributors
