@@ -68,8 +68,14 @@ define(function (require) {
 
 			if (settings.triggers[0].type === 'SalesforceObjectTriggerV2' &&
 					settings.triggers[0].configurationArguments &&
-					settings.triggers[0].configurationArguments.eventDataConfig &&
-					settings.triggers[0].configurationArguments.eventDataConfig.objects) {
+					settings.triggers[0].configurationArguments.eventDataConfig) {
+
+				// This workaround is necessary as Salesforce occasionally returns the eventDataConfig-object as string
+				if (typeof settings.triggers[0].configurationArguments.eventDataConfig === 'stirng' ||
+							!settings.triggers[0].configurationArguments.eventDataConfig.objects) {
+						settings.triggers[0].configurationArguments.eventDataConfig = JSON.parse(settings.triggers[0].configurationArguments.eventDataConfig);
+				}
+
 				settings.triggers[0].configurationArguments.eventDataConfig.objects.forEach((obj) => {
 					deFields = deFields.concat(obj.fields.map((fieldName) => {
 						return obj.dePrefix + fieldName;
@@ -91,6 +97,8 @@ define(function (require) {
 			}
 		} catch (e) {
 			console.error(e);
+			$('#select-id-dropdown').hide();
+			$('#select-id').show();
 		}
 	}
 
