@@ -76,7 +76,9 @@
 			"format": "json",
 			"useJwt": true,
 			"customerKey": "<EXTERNAL KEY OF THE SALT KEY FOR THE JWT>",
-			"timeout": 90000
+			"timeout": 90000,
+			"retryCount": 5,
+			"retryDelay": 100
 		}
 	},
 	"edit": {
