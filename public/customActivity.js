@@ -71,7 +71,7 @@ define(function (require) {
 					settings.triggers[0].configurationArguments.eventDataConfig) {
 
 				// This workaround is necessary as Salesforce occasionally returns the eventDataConfig-object as string
-				if (typeof settings.triggers[0].configurationArguments.eventDataConfig === 'stirng' ||
+				if (typeof settings.triggers[0].configurationArguments.eventDataConfig === 'string' ||
 							!settings.triggers[0].configurationArguments.eventDataConfig.objects) {
 						settings.triggers[0].configurationArguments.eventDataConfig = JSON.parse(settings.triggers[0].configurationArguments.eventDataConfig);
 				}
